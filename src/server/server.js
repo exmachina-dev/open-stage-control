@@ -144,7 +144,7 @@ function httpCheck(ok, error){
 }
 
 zeroconf.publish({
-    name: settings.infos.appName + (settings.read('instanceName') ? ' (' + settings.read('instanceName') + ')' : ''),
+    name: settings.infos.productName + (settings.read('instanceName') ? ' (' + settings.read('instanceName') + ')' : ''),
     type: 'http',
     port: settings.read('port') || 8080
 }).on('error', (e)=>{

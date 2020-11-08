@@ -129,7 +129,7 @@ class OscTCPServer extends EventEmitter {
         }
 
         zeroconf.publish({
-            name: settings.infos.appName + (settings.read('instance-name') ? ' (' + settings.read('instance-name') + ')' : ''),
+            name: settings.infos.productName + (settings.read('instance-name') ? ' (' + settings.read('instance-name') + ')' : ''),
             protocol: 'tcp',
             type: 'osc',
             port: tcpInPort

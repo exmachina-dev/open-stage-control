@@ -10,7 +10,7 @@ module.exports = function(options={}) {
     var window
 
     window = new BrowserWindow({
-        title: options.title || settings.infos.appName,
+        title: options.title || settings.infos.productName,
         icon: path.resolve(__dirname + '/../assets/logo.png'),
         backgroundColor: options.color || theme.backgroundColor,
         type: options.type,

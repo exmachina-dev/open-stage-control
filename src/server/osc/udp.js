@@ -19,7 +19,7 @@ oscUDPServer.on('error', function(e) {
 })
 
 zeroconf.publish({
-    name: settings.infos.appName + (settings.read('instance-name') ? ' (' + settings.read('instance-name') + ')' : ''),
+    name: settings.infos.productName + (settings.read('instance-name') ? ' (' + settings.read('instance-name') + ')' : ''),
     protocol: 'udp',
     type: 'osc',
     port: oscInPort

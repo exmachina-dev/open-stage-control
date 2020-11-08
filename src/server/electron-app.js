@@ -36,7 +36,7 @@ var template = [{
 if (process.platform === 'darwin') {
     // Add app menu (macOs)
     template.unshift({
-        label: settings.infos.appName,
+        label: settings.infos.productName,
         submenu: [
             {
                 label: 'Hide ' + infos.productName,
