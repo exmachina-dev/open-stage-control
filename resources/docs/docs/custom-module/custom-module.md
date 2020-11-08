@@ -81,6 +81,12 @@ Returns specified server option. `name` must be the option's long name without t
 
 ----
 
+#### `settings.appAddresses()`
+
+Returns the server's http addresses.
+
+----
+
 #### `options`
 
 `Array` containing the extra options passed to `--custom-module` after the filename

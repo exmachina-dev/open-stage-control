@@ -52,7 +52,10 @@ class CustomModule {
                 }
             },
             console: console,
-            settings: settings,
+            settings: {
+                read: settings.read,
+                appAddresses: settings.appAddresses,
+            },
             setTimeout: this.setTimeout.bind(this),
             clearTimeout: this.clearTimeout.bind(this),
             setInterval: this.setInterval.bind(this),
