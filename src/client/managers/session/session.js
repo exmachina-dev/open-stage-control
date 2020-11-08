@@ -211,6 +211,12 @@ var converters = [
 
             }
 
+            var label = data.label === undefined ?  'auto' : data.label
+            if (label !== false && data.type && !data.type.match(/button|menu|modal|clone|html/)) {
+                var label = label === 'auto' ? '@{this.id}' : label
+                data.html = label
+            }
+
         }
     },
     {

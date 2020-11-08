@@ -4,7 +4,10 @@
 
 - midi
   - accept sending sysex strings without spaces between the bytes
-  
+
+- misc
+  - sessions converted from v0 will use the widget's html property to display the former label property
+
 ## 1.6.2
 
 - bug fixes
