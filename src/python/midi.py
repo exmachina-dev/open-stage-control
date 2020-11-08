@@ -194,8 +194,9 @@ def send_midi(name, event, *args):
             m = []
             for arg in args:
                 if type(arg) is str:
-                    arg = arg.split(' ')
-                    arg = [int(x, 16) for x in arg]
+                    arg = arg.replace(' ', '')                          # remove spaces
+                    arg = [arg[i:i+2] for i in range(0, len(arg), 2)]   # split in 2 chars bytes
+                    arg = [int(x, 16) for x in arg]                     # parse hex bytes
                     for x in arg:
                         m.append(x)
                 else:

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.3
+
+- midi
+  - accept sending sysex strings without spaces between the bytes
+  
 ## 1.6.2
 
 - bug fixes
