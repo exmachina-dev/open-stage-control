@@ -41,7 +41,7 @@ class Input extends Canvas {
         this.stringValue = ''
         this.focused = false
         this.tabKeyBlur = false
-        this.fieldValidator = false
+        this.fieldValidator = null
 
         if (this.getProp('vertical')) this.widget.classList.add('vertical')
         if (this.getProp('align') === 'left') this.widget.classList.add('left')
