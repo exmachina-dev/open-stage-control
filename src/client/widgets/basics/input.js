@@ -58,7 +58,9 @@ class Input extends Canvas {
                 this.tabKeyBlur = false
             })
             var asYouType = this.getProp('asYouType')
-            this.fieldValidator = new RegExp('[^'+this.getProp('fieldValidator')+']', 'g')
+            if (this.getProp('fieldValidator')) {
+                this.fieldValidator = new RegExp('[^'+this.getProp('fieldValidator')+']', 'g')
+            }
             this.input.addEventListener('keydown', (e)=>{
                 if (e.keyCode === 13) this.blur() // enter
                 else if (e.keyCode === 27) this.blur(false) // esc
