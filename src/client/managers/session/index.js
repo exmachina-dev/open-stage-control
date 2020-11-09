@@ -5,6 +5,7 @@ var ipc = require('../../ipc/'),
     uiFileupload = require('../../ui/ui-fileupload'),
     UiModal = require('../../ui/ui-modal'),
     uiLoading = require('../../ui/ui-loading'),
+    uiConsole = require('../../ui/ui-console'),
     {saveAs} = require('file-saver'),
     widgetManager = require('../widgets'),
     locales = require('../../locales'),
@@ -39,6 +40,7 @@ var SessionManager = class SessionManager {
         setTimeout(()=>{
             try {
 
+                uiConsole.clear()
                 this.session = new Session(session)
                 container.innerHTML = ''
                 parser.reset()

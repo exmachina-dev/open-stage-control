@@ -2,6 +2,9 @@
 
 ## 1.6.3
 
+- editor
+  - add console panel under the inspector to ease debugging
+
 - bug fixes
   - missing context menu (copy, paste) in inspector inputs
 

@@ -18,7 +18,7 @@
 
 <body>
     <osc-workspace>
-        <osc-toolbar></osc-toolbar>
+        <osc-toolbar id="main-menu"></osc-toolbar>
         <osc-panel-container class="left">
             <div class="resize-handle left"></div>
             <div class="toggle-button left"></div>
@@ -37,6 +37,9 @@
             <osc-panel-inner class="right">
                 <osc-panel-header></osc-panel-header>
                 <osc-panel-content  class="right" id="osc-inspector"></osc-panel-content>
+                <osc-panel-content  class="right" id="osc-console">
+                    <osc-panel-header></osc-panel-header>
+                </osc-panel-content>
             </osc-panel-inner>
         </osc-panel-container>
         <osc-modal-container></osc-modal-container>

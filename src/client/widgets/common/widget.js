@@ -661,7 +661,7 @@ class Widget extends EventEmitter {
             } catch (err) {
                 let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
                     line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
-                console.log((this.getProp('id') || this.props.id) + '.' + propName + ': JS{{}} error:\n' + err + line)
+                console.error((this.getProp('id') || this.props.id) + '.' + propName + ': JS{{}} error:\n' + err + line)
             }
 
             try {
@@ -682,7 +682,7 @@ class Widget extends EventEmitter {
             } catch (err) {
                 let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
                     line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
-                console.log((this.getProp('id') || this.props.id) + '.' + propName + ': #{} error:\n' + err + line)
+                console.error((this.getProp('id') || this.props.id) + '.' + propName + ': #{} error:\n' + err + line)
             }
 
             for (let k in variables) {

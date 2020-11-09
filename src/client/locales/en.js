@@ -1,5 +1,10 @@
 module.exports = {
 
+    // console
+    console_title: 'Console',
+    console_clear: 'Clear console',
+
+
     // editor
     editor: 'Editor',
     editor_enabled: 'Enabled',

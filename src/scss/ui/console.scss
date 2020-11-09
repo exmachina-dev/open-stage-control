@@ -1,0 +1,53 @@
+$padding: 8rem;
+
+#osc-console {
+    flex: 0;
+    min-height: 31%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track-piece {
+        border-left-color: var(--color-background)!important;
+        border-top-color: var(--color-background)!important;
+    }
+
+    .actions {
+        position: absolute;
+        right: 0;
+        padding: $padding;
+
+        div {
+            cursor: pointer;
+            color: var(--color-text);
+            opacity: 0.25;
+            &:hover {
+                opacity: 0.5
+            }
+        }
+        i {
+            pointer-events: none;
+        }
+    }
+
+}
+
+osc-console {
+    display: block;
+    flex: 1;
+    padding: $padding $padding;
+    overflow: auto;
+    background: var(--color-background);
+    border-left: 4rem solid var(--color-ui-background);
+}
+
+osc-console-message {
+    user-select: text;
+    cursor: text;
+    display: block;
+
+    &.error {
+        color: var(--color-error);
+    }
+
+    margin-bottom: 4rem;
+}
