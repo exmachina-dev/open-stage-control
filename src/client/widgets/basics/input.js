@@ -19,7 +19,14 @@ class Input extends Canvas {
                 unit: {type: 'string', value: '', help: 'Unit will be appended to the displayed widget\'s value (it doesn\'t affect osc messages)'},
             },
             class_specific: {
-                asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'}
+                asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'},
+                fieldValidator: {type: 'string', value: '', help: [
+                    'Regular expression: if the submitted value doesn\'t match the regular expression, it will be reset to the last valid value.',
+                    'If leading and trailing slashes are omitted, they will be added automatically and the flag will be set to "gm"',
+                    'Examples:',
+                    '- `^[0-9]*$` accepts digits only, any number of them',
+                    '- `/^[a-z\s]{0,10}$/i` accept between 0 and 10 alphabetic characters and spaces (case insensitive)',
+                ]}
             }
         })
 
@@ -37,6 +44,7 @@ class Input extends Canvas {
         this.stringValue = ''
         this.focused = false
         this.tabKeyBlur = false
+        this.fieldValidator = null
 
         if (this.getProp('vertical')) this.widget.classList.add('vertical')
         if (this.getProp('align') === 'left') this.widget.classList.add('left')
@@ -53,6 +61,22 @@ class Input extends Canvas {
                 this.tabKeyBlur = false
             })
             var asYouType = this.getProp('asYouType')
+
+            if (this.getProp('fieldValidator') !== '') {
+                var fieldValidator = String(this.getProp('fieldValidator')),
+                    flags = fieldValidator.match(/^\/.*\/.*$/) ? fieldValidator.split('/').pop() : 'gm',
+                    validator = fieldValidator.match(/^\/.*\/.*$/) ? fieldValidator.replace(/^\/(.*)\/.*$/, '$1') : fieldValidator
+
+                if (!validator.match(/^\^.*\$$/)) validator = '^' + validator + '$'
+
+                try {
+                    this.fieldValidator = new RegExp(validator, flags)
+                } catch(err) {
+                    console.error((this.getProp('id') || this.props.id) + '.' + propName + ':\n')
+                    console.error(err)
+                }
+            }
+
             this.input.addEventListener('keydown', (e)=>{
                 if (e.keyCode === 13) this.blur() // enter
                 else if (e.keyCode === 27) this.blur(false) // esc
@@ -94,6 +118,11 @@ class Input extends Canvas {
     }
 
     inputChange() {
+
+        if (this.fieldValidator && !this.input.value.match(this.fieldValidator)) {
+            this.input.value = this.value
+            return
+        }
 
         this.setValue(this.input.value, {sync:true, send:true})
 
