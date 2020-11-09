@@ -63,10 +63,10 @@ class Button extends Widget {
 
             if (this.getProp('doubleTap')) {
 
-                doubletab(this.widget, ()=>{
+                doubletab(this.container, (e)=>{
 
                     this.active = true
-                    this.setValue(this.getProp('on'), {sync: true, send: true})
+                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY})
 
                     if (tap) this.container.classList.add('active')
 
@@ -74,17 +74,17 @@ class Button extends Widget {
 
             } else {
 
-                this.on('draginit',()=>{
+                this.on('draginit',(e)=>{
 
                     if (this.active) return
 
                     this.active = true
-                    this.setValue(this.getProp('on'), {sync: true, send: true})
+                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY})
 
                     if (tap) this.container.classList.add('active')
 
 
-                }, {element: this.widget})
+                }, {element: this.container})
 
             }
 
@@ -97,36 +97,36 @@ class Button extends Widget {
                 if (!tap) this.setValue(this.getProp('off'), {sync: true, send: true})
                 if (tap) this.container.classList.remove('active')
 
-            }, {element: this.widget})
+            }, {element: this.container})
 
         } else {
 
             if (this.getProp('doubleTap')) {
 
-                doubletab(this.widget, ()=>{
+                doubletab(this.container, (e)=>{
 
 
                     this.active = true
-                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true})
+                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY})
 
                 })
 
             } else {
 
-                this.on('draginit',()=>{
+                this.on('draginit',(e)=>{
 
                     if (this.active) return
 
                     this.active = true
-                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true})
+                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY})
 
-                }, {element: this.widget})
+                }, {element: this.container})
 
                 this.on('dragend',()=>{
 
                     this.active = false
 
-                }, {element: this.widget})
+                }, {element: this.container})
 
             }
 

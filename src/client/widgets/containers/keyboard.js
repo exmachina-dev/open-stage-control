@@ -1,6 +1,7 @@
 var Panel = require('./panel'),
     Widget = require('../common/widget'),
-    parser = require('../../parser')
+    parser = require('../../parser'),
+    {mapToScale} = require('../utils')
 
 
 class Keyboard extends Panel {
@@ -28,11 +29,12 @@ class Keyboard extends Panel {
                 traversing: {type: 'boolean', value: true, help: 'Set to `false` to disable traversing gestures'},
                 on: {type: '*', value: 1, help: [
                     'Set to `null` to send send no argument in the osc message',
-                    'Can be an `object` if the type needs to be specified (see preArgs)'
                 ]},
                 off: {type: '*', value: 0, help: [
                     'Set to `null` to send send no argument in the osc message',
-                    'Can be an `object` if the type needs to be specified (see preArgs)'
+                ]},
+                velocity: {type: 'boolean', value: false, help: [
+                    'Set to `true` to map the touch coordinates between `off` (top) and `on` (bottom). Requires `on` and `off` to be numbers',
                 ]},
                 mode: {type: 'string', value: 'push', choices: ['push', 'toggle', 'tap'], help: [
                     'Interraction mode:',
@@ -51,6 +53,12 @@ class Keyboard extends Panel {
 
         this.childrenType = undefined
         this.value = []
+        this.keyHeight = 100
+
+        this.on('resize', (e)=>{
+            this.keyHeight = e.height
+        }, {element: this.widget})
+
 
         this.on('change',(e)=>{
 
@@ -58,12 +66,25 @@ class Keyboard extends Panel {
 
             if (widget === this) return
 
-            this.value[widget._index] = widget.getValue()
+
+            var value
+            if (widget.getValue()) {
+                if (this.getProp('velocity')) {
+                    var height = widget._black ? this.keyHeight * 0.65 : this.keyHeight
+                    value = mapToScale(e.options.y, [0, height * 0.9], [this.getProp('off'), this.getProp('on')], this.decimals)
+                } else {
+                    value = this.getProp('on')
+                }
+            } else {
+                value = this.getProp('off')
+            }
+
+            this.value[widget._index] = value
 
             if (e.options.send) {
                 var start = parseInt(this.getProp('start'))
                 this.sendValue({
-                    v: [e.widget._index + start, widget.getValue() ? this.getProp('on') : this.getProp('off')]
+                    v: [e.widget._index + start, value]
                 })
             }
 
@@ -120,6 +141,7 @@ class Keyboard extends Panel {
             } else {
                 key.container.classList.add('black')
                 key.container.style.setProperty('--rank', whiteKeys2)
+                key._black = true
             }
 
             this.value[i - start] = this.getProp('off')

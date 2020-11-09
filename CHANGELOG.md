@@ -2,6 +2,9 @@
 
 ## 1.6.3
 
+- widgets
+  - keyboard: add `velocity` property (allows mapping the touch coordinates between `off` (top) and `on` (bottom))
+
 - midi
   - accept sending sysex strings without spaces between the bytes
 

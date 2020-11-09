@@ -32,6 +32,7 @@
         bottom:0;
         margin: var(--widget-spacing);
         padding: var(--widget-padding);
+        pointer-events: none;
 
 
         @include pseudo-stroke($z: -1);
