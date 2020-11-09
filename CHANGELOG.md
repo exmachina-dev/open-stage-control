@@ -2,6 +2,9 @@
 
 ## 1.6.3
 
+- bug fixes
+  - missing context menu (copy, paste) in inspector inputs
+
 - widgets
   - keyboard: add `velocity` property (allows mapping the touch coordinates between `off` (top) and `on` (bottom))
 

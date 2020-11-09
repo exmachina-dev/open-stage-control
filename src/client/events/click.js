@@ -17,7 +17,9 @@ if (macOs) {
         DOM.dispatchEvent(event.target, 'fast-right-click', event)
     })
 } else {
-    document.body.setAttribute('oncontextmenu', 'return false')
+    document.body.addEventListener('contextmenu', (event)=>{
+        if (event.target && (!event.target.tagName.match(/INPUT|TEXTAREA|OSC-CONSOLE|OSC-CONSOLE-MESSAGE/))) event.preventDefault()
+    })
 }
 
 function mouseToFastClick(event) {

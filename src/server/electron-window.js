@@ -1,5 +1,5 @@
 var path = require('path'),
-    {BrowserWindow, dialog, shell, screen} = require('electron'),
+    {BrowserWindow, dialog, shell, screen, Menu, MenuItem} = require('electron'),
     shortcut = require('electron-localshortcut'),
     app = require('./electron-app'),
     settings = require('./settings'),
@@ -130,6 +130,15 @@ module.exports = function(options={}) {
         geometry[options.id] = window.getBounds()
         settings.write('geometry', geometry)
     })
+
+    var menu = new Menu()
+    menu.append(new MenuItem({role: 'copy'}))
+    menu.append(new MenuItem({role: 'paste'}))
+    window.webContents.on('context-menu', (e, data) => {
+        menu.items[0].enabled = data.editFlags.canCopy
+        menu.items[1].enabled = data.editFlags.canPaste
+        menu.popup({window: window, x: e.x, y: e.y })
+    }, false)
 
     if (options.shortcuts) {
 
