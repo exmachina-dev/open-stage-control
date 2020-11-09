@@ -17,7 +17,7 @@ class UiSidePanel extends UiWidget {
 
         this.cacheKey = 'ui.' + options.selector
 
-        this.minWidth = options.size || 250
+        this.minWidth = options.size === undefined ? 250 : options.size
         this.width = cache.get(this.cacheKey + '.width') || options.size || 250
 
         this.disabled = false

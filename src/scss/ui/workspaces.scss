@@ -126,7 +126,7 @@ osc-panel-container {
         background: var(--color-ui-background);
         font-size: 14rem;
         z-index: 2;
-        transition: transform 0.2s ease-out 0.1s, border-color 0.2s ease-out 0.1s;
+        transition: transform 0.2s ease-out 0.1s, border-color 0.1s ease-out 0.1s;
         will-change: transform;
 
         border-style: solid;
@@ -215,8 +215,8 @@ osc-panel-container {
 
     }
 
-    &:hover .toggle-button, .toggle-button:hover {
-        transition: transform 0.2s ease-out 0s, border-color 0.2s ease-out 0s;
+    &:hover > .toggle-button, .toggle-button:hover {
+        transition: transform 0.2s ease-out 0s, border-color 0.3s ease-out 0s;
         transform: translateX(0) translateY(0);
         border-color: var(--color-background);
         &:after {
@@ -298,6 +298,7 @@ osc-panel-header {
     font-size: 109%;
     text-overflow: ellipsis;
     padding: 0 8rem;
+    flex-shrink: 0;
 
     &:before {
         content: "";

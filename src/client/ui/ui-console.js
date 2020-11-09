@@ -1,10 +1,12 @@
 var UiWidget = require('./ui-widget'),
+    UiSidePanel = require('./ui-sidepanel'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     locales = require('../locales'),
-    {icon} = require('./utils')
+    {icon} = require('./utils'),
+    cache = require('../managers/cache')
 
-class UiConsole extends UiWidget {
+class UiConsole extends UiSidePanel {
 
     constructor(options) {
 
@@ -13,7 +15,7 @@ class UiConsole extends UiWidget {
         this.header = DOM.get(this.container, 'osc-panel-header')[0]
 
         this.header.appendChild(html`<label>${locales('console_title')}</label>`)
-        this.messages = this.container.appendChild(html`<osc-console></osc-console>`)
+        this.messages = this.content.appendChild(html`<osc-console></osc-console>`)
         // this.inputWrapper = this.container.appendChild(html`<osc-console-input></osc-console-inpu>`)
         // this.input = this.inputWrapper.appendChild(html`<textarea></textarea>`)
 
@@ -67,6 +69,8 @@ class UiConsole extends UiWidget {
         // })
 
 
+        this.enable()
+
     }
 
     log(type, message) {
@@ -112,4 +116,4 @@ class UiConsole extends UiWidget {
 
 }
 
-module.exports = new UiConsole({selector: '#osc-console'})
+module.exports = new UiConsole({selector: '#osc-console', size: 40})

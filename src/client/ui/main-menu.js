@@ -6,7 +6,8 @@ var UiToolbar = require('./ui-toolbar'),
     editor = require('../editor'),
     sessionManager = require('../managers/session/'),
     stateManager = require('../managers/state'),
-    {leftUiSidePanel, rightUiSidePanel} = require('../ui/')
+    {leftUiSidePanel, rightUiSidePanel} = require('../ui/'),
+    uiConsole = require('../ui/ui-console')
 
 
 var recentSessions = [{label: locales('file_open_recent_wait'), class: 'disabled'}]
@@ -157,6 +158,11 @@ var menuEntries = [
                 class: ()=>{return 'toggle ' + (rightUiSidePanel.minimized ? 'off' : 'on')},
                 action: ()=>{return rightUiSidePanel.minimized ? rightUiSidePanel.restore() : rightUiSidePanel.minimize()},
                 shortcut: 'mod + i'
+            },
+            {
+                label: locales('console_title'),
+                class: ()=>{return 'toggle ' + (uiConsole.minimized ? 'off' : 'on')},
+                action: ()=>{return uiConsole.minimized ? uiConsole.restore() : uiConsole.minimize()}
             },
             {
                 separator: true
