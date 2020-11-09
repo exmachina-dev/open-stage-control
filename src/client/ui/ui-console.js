@@ -13,14 +13,16 @@ class UiConsole extends UiWidget {
         this.header = DOM.get(this.container, 'osc-panel-header')[0]
 
         this.header.appendChild(html`<label>${locales('console_title')}</label>`)
+        this.messages = this.container.appendChild(html`<osc-console></osc-console>`)
+        // this.inputWrapper = this.container.appendChild(html`<osc-console-input></osc-console-inpu>`)
+        // this.input = this.inputWrapper.appendChild(html`<textarea></textarea>`)
+
         this.actions = this.header.appendChild(html`<div class="actions"></div>`)
         this.clearBtn = this.actions.appendChild(html`<div class="clear" title="${locales('console_clear')}">${raw(icon('trash'))}</div>`)
         this.clearBtn.addEventListener('click', ()=>{
             this.clear()
         })
 
-
-        this.messages = this.container.appendChild(html`<osc-console></osc-console>`)
         this.length = 0
         this.maxLength = 200
 
@@ -33,7 +35,7 @@ class UiConsole extends UiWidget {
             _this.log('log', message)
             log(...arguments)
         }
-        
+
         console.error = function(message){
             _this.log('error', message)
             error(...arguments)
@@ -43,6 +45,27 @@ class UiConsole extends UiWidget {
             _this.log('error', message)
             onerror(...arguments)
         }
+
+
+
+        // this.input.addEventListener('keydown', (event)=>{
+        //     if (event.keyCode === 13 && !event.shiftKey) {
+        //
+        //         event.preventDefault()
+        //         DOM.dispatchEvent(event.target, 'change')
+        //
+        //     }
+        // })
+        //
+        // this.input.addEventListener('change', (event)=>{
+        //     try {
+        //         console.log(eval(this.input.value))
+        //     } catch (err) {
+        //         console.error(err)
+        //     }
+        //     this.input.value = ''
+        // })
+
 
     }
 
