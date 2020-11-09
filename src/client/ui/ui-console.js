@@ -76,6 +76,13 @@ class UiConsole extends UiWidget {
 
             </osc-console-message>
         `)
+
+        if (typeof message === 'object') {
+            try {
+                message = JSON.stringify(message)
+            } catch (_) {}
+        }
+
         node.textContent = message
         if (type !== 'error' && node.textContent.match(/error/i)) node.classList.add('error')
 
