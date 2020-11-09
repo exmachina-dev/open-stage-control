@@ -19,7 +19,11 @@ class Input extends Canvas {
                 unit: {type: 'string', value: '', help: 'Unit will be appended to the displayed widget\'s value (it doesn\'t affect osc messages)'},
             },
             class_specific: {
-                asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'}
+                asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'},
+                fieldValidator: {type: 'string|boolean', value: false, help: [
+                    'Set to `abc` to make the input reject all characters, except a, b or c',
+                    '`0-9` will only allow integer to be entered',
+                    '`a-z` will only allow lowercase characters']}
             }
         })
 
@@ -37,6 +41,7 @@ class Input extends Canvas {
         this.stringValue = ''
         this.focused = false
         this.tabKeyBlur = false
+        this.fieldValidator = false
 
         if (this.getProp('vertical')) this.widget.classList.add('vertical')
         if (this.getProp('align') === 'left') this.widget.classList.add('left')
@@ -53,6 +58,7 @@ class Input extends Canvas {
                 this.tabKeyBlur = false
             })
             var asYouType = this.getProp('asYouType')
+            this.fieldValidator = new RegExp('[^'+this.getProp('fieldValidator')+']', 'g')
             this.input.addEventListener('keydown', (e)=>{
                 if (e.keyCode === 13) this.blur() // enter
                 else if (e.keyCode === 27) this.blur(false) // esc
@@ -95,6 +101,9 @@ class Input extends Canvas {
 
     inputChange() {
 
+        if (this.fieldValidator) {
+            this.input.value = this.input.value.replace(this.fieldValidator, '');
+        }
         this.setValue(this.input.value, {sync:true, send:true})
 
     }
