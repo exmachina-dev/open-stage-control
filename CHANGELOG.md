@@ -5,6 +5,7 @@
 - bug fixes
   - missing context menu (copy, paste) in inspector inputs
   - osc listeners not resolving "auto" address
+  - `ELECTRON_RUN_AS_NODE` headless mode not working without `--no-gui` option
 
 - editor
   - add console panel under the inspector to ease debugging

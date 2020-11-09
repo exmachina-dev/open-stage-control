@@ -32,8 +32,7 @@ function nodeMode() {
     })
 
 }
-
-if (process.title === 'node' || process.title === 'node.exe') {
+if (process.title === 'node' || process.title === 'node.exe' || process.env.ELECTRON_RUN_AS_NODE) {
 
     nodeMode()
 
